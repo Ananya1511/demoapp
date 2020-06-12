@@ -23,21 +23,21 @@ pipeline {
         junit '**/TEST-*.xml'
       }
     }
-    stage('Build APK') {
-      steps {
-        // Finish building and packaging the APK
-        bat './gradlew assembleDebug'
+   // stage('Build APK') {
+     // steps {
+       // // Finish building and packaging the APK
+        //bat './gradlew assembleDebug'
 
         // Archive the APKs so that they can be downloaded from Jenkins
-        archiveArtifacts '**/*.apk'
-      }
-    }
-    stage('Stage Archive') {
-      steps {
+       // archiveArtifacts '**/*.apk'
+      //}
+    //}
+    //stage('Stage Archive') {
+      //steps {
         //tell Jenkins to archive the apks
-        archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
-      }
-    }
+        //archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
+      //}
+    //}
     stage('Static analysis') {
       steps {
         // Run Lint and analyse the results

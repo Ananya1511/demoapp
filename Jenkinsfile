@@ -20,7 +20,7 @@ pipeline {
         bat './gradlew test'
 
         // Analyse the test results and update the build result as appropriate
-        junit '**/Test.xml'
+        junit '**/TEST-*.xml'
       }
     }
    // stage('Build APK') {

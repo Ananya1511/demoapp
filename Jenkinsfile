@@ -17,7 +17,7 @@ pipeline {
     stage('Unit test') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
-        bat './gradlew clean test'
+        bat './gradlew test'
 
         // Analyse the test results and update the build result as appropriate
         junit '**/TEST-*.xml'

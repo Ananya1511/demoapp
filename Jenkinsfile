@@ -8,13 +8,13 @@ pipeline {
     skipStagesAfterUnstable()
   }
   stages {
-    stage('Compile') {
+    stage('Build') {
       steps {
         // Compile the app and its dependencies
         bat './gradlew clean compileDebugSources'
       }
     }
-    stage('Unit test') {
+    stage('Unit Test') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
         bat './gradlew test'
@@ -38,7 +38,7 @@ pipeline {
         //archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
       //}
     //}
-    stage('Static analysis') {
+    stage('Static Security Analysis') {
       steps {
         // Run Lint and analyse the results
         bat './gradlew lintDebug'

@@ -1,25 +1,30 @@
 pipeline {
            agent any
-           stages {
-                stage("Git checkout") {
-                     steps {
-                          git "https://github.com/Ananya1511/demoapp.git"
-                     }
+           stages {                
+                stage("Build") {
+                    steps {
+                        bat 'gradlew clean build'
+                    }
                 }
                 stage("Unit tests") {
                     steps{
                         bat 'gradlew test'
                     }
                 }
-                stage("Build") {
-                    steps {
-                        bat 'gradlew clean build -x test'
-                    }
+                stage("Static Code Analysis") {
+                     steps{
+                        bat 'gradlew lintDebug'
+                     }
                 }
-                      stage('Static Code Analysis') {
+                stage('Static Security Analysis') {
                     steps{
                         //bat 'gradlew lint'
-                       appscan application: '178d34b8-bdaa-45d9-b6eb-e013e8ebb040', credentials: 'hcl-app-scan', name: 'HCL-app-scan', scanner: mobile_analyzer(hasOptions: false, target: 'C:\\Users\\anapraka\\.jenkins\\workspace\\androidPipeline\\app\\build\\outputs\\apk\\debug\\app-debug.apk'), type: 'Mobile Analyzer', wait: true
+                        appscan application: '178d34b8-bdaa-45d9-b6eb-e013e8ebb040', 
+                        credentials: 'hcl-app-scan', 
+                        name: 'HCL-app-scan', 
+                        scanner: mobile_analyzer(hasOptions: false, target: 'C:\\Users\\anapraka\\.jenkins\\workspace\\androidPipeline\\app\\build\\outputs\\apk\\debug\\app-debug.apk'),
+                        type: 'Mobile Analyzer', 
+                        wait: true
                     }
                 }
                 stage('Publish to App Center') {

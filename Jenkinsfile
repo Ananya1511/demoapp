@@ -13,7 +13,7 @@ pipeline {
                 }
                 stage("Static Code Analysis") {
                      steps{
-                        bat 'gradlew lintDebug'
+                        bat 'gradlew lint'
                      }
                 }
                 stage('Static Security Analysis') {

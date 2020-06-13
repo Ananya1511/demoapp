@@ -47,7 +47,7 @@ pipeline {
     }
     stage('Publish') {
       environment {
-        APPCENTER_API_TOKEN = credentials('4b17f9df2e49f256aed3150603038305e27224a9')
+        APPCENTER_API_TOKEN = credentials('sample-api-token')
       }
       steps {
         appCenter apiToken: APPCENTER_API_TOKEN,

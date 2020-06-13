@@ -45,5 +45,17 @@ pipeline {
         androidLint pattern: '**/lint-results-*.xml'
       }
     }
+    stage('Publish') {
+      environment {
+        APPCENTER_API_TOKEN = credentials('a1c099b2f00a001f465bf9b36b4374fa7c29fa85')
+      }
+      steps {
+        appCenter apiToken: APPCENTER_API_TOKEN,
+            ownerName: 'ananyaprakash1511-gmail.com',
+            appName: 'demoapp',
+            pathToApp: 'sample/demoapp.apk',
+            distributionGroups: 'ap'
+      }
+    }
   } 
 }

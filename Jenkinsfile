@@ -7,13 +7,8 @@ pipeline {
     // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
   }
+  
   stages {
-    stage('Build') {
-      steps {
-        // Compile the app and its dependencies
-        bat './gradlew clean compileDebugSources'
-      }
-    }
     stage('Unit Test') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
@@ -23,39 +18,24 @@ pipeline {
         junit '**/TEST-*.xml'
       }
     }
-    stage('Static Security Analysis') {
+    stage('Build') {
       steps {
-        // Run Lint and analyse the results
-        bat './gradlew lintDebug'
-        androidLint pattern: '**/lint-results-*.xml'
+        // Compile the app and its dependencies
+        bat './gradlew clean build'
       }
-    }
-     stage('Build APK') {
-      steps {
-        // Finish building and packaging the APK
-        bat './gradlew assembleDebug'
-
-        // Archive the APKs so that they can be downloaded from Jenkins
-        archiveArtifacts '**/*.apk'
-      }
-    }
-    //stage('Stage Archive') {
-      //steps {
-     //   //tell Jenkins to archive the apks
-        //archiveArtifacts artifacts: 'app/build/outputs/apk/demoapp.apk', fingerprint: true
-      //}
-   // }
-    stage('Publish') {
-      environment {
-        APPCENTER_API_TOKEN = credentials('a1c099b2f00a001f465bf9b36b4374fa7c29fa85')
-      }
-      steps {
-        appCenter apiToken: APPCENTER_API_TOKEN,
-            ownerName: 'ananyaprakash1511-gmail.com',
-            appName: 'demoapp',
-            pathToApp: 'sample/demoapp.apk',
-            distributionGroups: 'ap'
-      }
-    }
+    }    
+    
+    stage('Publish to App Center') {
+                    environment {
+                        APPCENTER_API_TOKEN = 'a1c099b2f00a001f465bf9b36b4374fa7c29fa85'
+                    }
+                    steps {
+                        appCenter apiToken: APPCENTER_API_TOKEN, 
+                        appName: 'My-Application',
+                        distributionGroups: 'Collaborators', 
+                        ownerName: 'ananyaprakash1511-gmail.com', 
+                        pathToApp: 'app/build/outputs/apk/debug/app-debug.apk'
+                    }
+                }
   } 
 }

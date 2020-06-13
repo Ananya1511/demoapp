@@ -36,15 +36,15 @@ pipeline {
         bat './gradlew assembleDebug'
 
         // Archive the APKs so that they can be downloaded from Jenkins
-        archiveArtifacts '**/demoapp.apk'
+        archiveArtifacts '**/*.apk'
       }
     }
-    stage('Stage Archive') {
-      steps {
-        //tell Jenkins to archive the apks
-        archiveArtifacts artifacts: 'app/build/outputs/apk/demoapp.apk', fingerprint: true
-      }
-    }
+    //stage('Stage Archive') {
+      //steps {
+     //   //tell Jenkins to archive the apks
+        //archiveArtifacts artifacts: 'app/build/outputs/apk/demoapp.apk', fingerprint: true
+      //}
+   // }
     stage('Publish') {
       environment {
         APPCENTER_API_TOKEN = credentials('sample-api-token')

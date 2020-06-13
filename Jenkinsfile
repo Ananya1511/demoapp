@@ -1,31 +1,32 @@
 pipeline {
-  agent {
-    // Run on a build agent where we have the Android SDK installed
-    label "master"
-  }
-  options {
-    // Stop the build early in case of compile or test failures
-    skipStagesAfterUnstable()
-  }
-  
-  stages {
-    stage('Unit Test') {
-      steps {
-        // Compile and run the unit tests for the app and its dependencies
-        bat 'gradlew test'
-
-        // Analyse the test results and update the build result as appropriate
-      //  junit '**/TEST-*.xml'
-      }
-    }
-    stage('Build') {
-      steps {
-        // Compile the app and its dependencies
-        bat 'gradlew clean build -x test'
-      }
-    }    
-    
-     stage('Publish to App Center') {
+           agent any
+           stages {
+                stage("Git checkout") {
+                     steps {
+                          git "https://github.com/ipankajmishra/AndroidPipeline.git"
+                     }
+                }
+                stage("Unit tests") {
+                    steps{
+                        bat 'gradlew test'
+                    }
+                }
+                stage("Build") {
+                    steps {
+                        bat 'gradlew clean build -x test'
+                    }
+                }
+                      stage('Static Code Analysis') {
+                    steps{
+                        //bat 'gradlew lint'
+                        appscan application: 'c970c5a2-a6dc-4019-9231-a5156f584d45',
+                                   credentials: 'HCL APP SCAN', name: 'HCL APP SCAN',
+                                   scanner: mobile_analyzer(hasOptions: false,
+                                                            target: 'C:/Program Files (x86)/Jenkins/workspace/My First Android Pipeline/app/build/outputs/apk/debug/app-debug.apk'),
+                                   type: 'Mobile Analyzer'
+                    }
+                }
+                stage('Publish to App Center') {
                     environment {
                         APPCENTER_API_TOKEN = '7943fdb1a13850de26e5f7b67599c3ff87a90cc5'//'bde0c2278c1177b8cbf9ffc34dc106ce7da66b24'
                     }
@@ -37,5 +38,5 @@ pipeline {
                         pathToApp: 'app/build/outputs/apk/debug/app-debug.apk'
                     }
                 }
-  } 
-}
+           }
+      }

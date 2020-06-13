@@ -21,7 +21,7 @@ pipeline {
     stage('Build') {
       steps {
         // Compile the app and its dependencies
-        bat './gradlew clean build'
+        bat './gradlew clean build -x test'
       }
     }    
     

@@ -3,7 +3,7 @@ pipeline {
            stages {
                 stage("Git checkout") {
                      steps {
-                          git "https://github.com/ipankajmishra/AndroidPipeline.git"
+                          git "https://github.com/Ananya1511/demoapp.git"
                      }
                 }
                 stage("Unit tests") {

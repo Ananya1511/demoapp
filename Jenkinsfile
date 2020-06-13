@@ -31,7 +31,7 @@ pipeline {
                     }
                     steps {
                         appCenter apiToken: APPCENTER_API_TOKEN, 
-                        appName: 'My-Application',
+                        appName: 'demoapp',
                         distributionGroups: 'Collaborators', 
                         ownerName: 'ananyaprakash1511-gmail.com', 
                         pathToApp: 'app/build/outputs/apk/debug/app-debug.apk'

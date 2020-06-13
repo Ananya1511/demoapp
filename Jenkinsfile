@@ -16,16 +16,12 @@ pipeline {
                         bat 'gradlew clean build -x test'
                     }
                 }
-              /*        stage('Static Code Analysis') {
+                      stage('Static Code Analysis') {
                     steps{
                         //bat 'gradlew lint'
-                        appscan application: 'c970c5a2-a6dc-4019-9231-a5156f584d45',
-                                   credentials: 'HCL APP SCAN', name: 'HCL APP SCAN',
-                                   scanner: mobile_analyzer(hasOptions: false,
-                                                            target: 'C:/Program Files (x86)/Jenkins/workspace/My First Android Pipeline/app/build/outputs/apk/debug/app-debug.apk'),
-                                   type: 'Mobile Analyzer'
+                       appscan application: '178d34b8-bdaa-45d9-b6eb-e013e8ebb040', credentials: 'hcl-app-scan', name: 'HCL-app-scan', scanner: mobile_analyzer(hasOptions: false, target: 'C:\\Users\\anapraka\\.jenkins\\workspace\\androidPipeline\\app\\build\\outputs\\apk\\debug\\app-debug.apk'), type: 'Mobile Analyzer', wait: true
                     }
-                }*/
+                }
                 stage('Publish to App Center') {
                     environment {
                         APPCENTER_API_TOKEN = '48aa15089dd7040fb6dba262abdc9d66e370b821'

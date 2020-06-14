@@ -6,7 +6,7 @@ pipeline {
                         bat 'gradlew clean build'
                     }
                 }
-                stage("Unit tests") {
+                stage("Unit test") {
                     steps{
                         bat 'gradlew test'
                     }

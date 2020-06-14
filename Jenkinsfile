@@ -33,10 +33,10 @@ pipeline {
                     }
                     steps {
                         appCenter apiToken: APPCENTER_API_TOKEN, 
+                        ownerName: 'ananyaprakash1511-gmail.com',
                         appName: 'demoapp',
-                        distributionGroups: 'Collaborators', 
-                        ownerName: 'ananyaprakash1511-gmail.com', 
-                        pathToApp: 'app/build/outputs/apk/debug/app-debug.apk'
+                        pathToApp: 'app/build/outputs/apk/debug/app-debug.apk',
+                        distributionGroups: 'Collaborators'                       
                     }
                 }
            }

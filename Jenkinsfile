@@ -3,22 +3,21 @@ pipeline {
            stages {                
                 stage("Build") {
                     steps {
-                        bat 'gradlew clean build'
+                        bat './gradlew clean build'
                     }
                 }
-                stage("Unit test") {
+                stage("Unit Test") {
                     steps{
-                        bat 'gradlew test'
+                        bat './gradlew test'
                     }
                 }
                 stage("Static Code Analysis") {
                      steps{
-                        bat 'gradlew lint'
+                        bat './gradlew lint'
                      }
                 }
                 stage('Static Security Analysis') {
                     steps{
-                        //bat 'gradlew lint'
                         appscan application: '178d34b8-bdaa-45d9-b6eb-e013e8ebb040', 
                         credentials: 'hcl-app-scan', 
                         name: 'HCL-app-scan', 

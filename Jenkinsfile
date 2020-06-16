@@ -18,7 +18,7 @@ pipeline {
                         androidLint pattern: '**/lint-results-*.xml'
                      }
                 }
-                stage('Sonarqube') {
+               /* stage('Sonarqube') {
                      environment {
                         SCANNER_HOME = tool 'SonarQubeScanner'
                       }
@@ -30,7 +30,7 @@ pipeline {
                          waitForQualityGate abortPipeline: true
                          }
                       }
-                 }
+                 }*/
                 
                       
                       

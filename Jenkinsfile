@@ -19,21 +19,18 @@ pipeline {
                      }
                 }
                 stage('Sonarqube') {
-                     /*environment {
+                     environment {
                         scannerHome = tool 'SonarQubeScanner'
                       }
                       steps {
                          withSonarQubeEnv('sonarqube') {
-                         bat "${scannerHome}/bin/sonar-scanner"
+                         bat "${scannerHome}/bin/sonar-scanner --stacktrace"
                          }
                       timeout(time: 10, unit: 'MINUTES') {
                          waitForQualityGate abortPipeline: true
                          }
-                      }*/
-                           steps{
-                           bat './gradlew sonarqube --stacktrace'
-                           }
-                }
+                      }
+                 }
                 
                       
                       

@@ -55,25 +55,5 @@ pipeline {
                                             distributionGroups: 'Collaborators'                       
                                  }
                       }
-                      
-               /* stage('Sonarqube') {
-                     def scannerHome = tool 'SonarScanner 4.0';
-                      //steps {
-                         withSonarQubeEnv('sonarqube') {
-                         bat '${SCANNER_HOME}/bin/sonar-scanner'
-                         }
-                      //timeout(time: 10, unit: 'MINUTES') {
-                        // waitForQualityGate abortPipeline: true
-                         //}
-                      }
-                 }*/
-                      /*stage('Sonar'){
-                                 steps{
-                                            bat 'gradle sonarqube'
-                                 }
-                      }*/
-                     
-                      
-                      
            }
-      }
+}

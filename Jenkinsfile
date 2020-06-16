@@ -21,7 +21,8 @@ pipeline {
                       stage('SonarQube analysis') {
                                  steps{
     withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
-      bat './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin'
+      bat './gradlew sonarqube'
+               //bat './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin'
     }
     }
   }

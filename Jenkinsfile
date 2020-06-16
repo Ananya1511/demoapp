@@ -31,7 +31,7 @@ pipeline {
                          }
                       }*/
                            steps{
-                           bat './gradlew sonarqube'
+                           bat './gradlew sonarqube --stacktrace'
                            }
                 }
                 

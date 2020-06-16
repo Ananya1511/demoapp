@@ -16,8 +16,10 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+plugins {
+  id "org.sonarqube" version "4.0"
+}
 //apply plugin: 'org.sonarqube'
-apply plugin: 'org.sonarqube'
 allprojects {
     repositories {
         google()

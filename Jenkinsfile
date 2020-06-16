@@ -20,7 +20,7 @@ pipeline {
                 }
                 stage('Sonarqube') {
                      environment {
-                        SCANNER_HOME = tool 'SonarQubeScanner'
+                        def SCANNER_HOME = tool 'SonarQubeScanner';
                       }
                       steps {
                          withSonarQubeEnv('sonarqube') {

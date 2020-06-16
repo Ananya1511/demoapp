@@ -25,7 +25,7 @@ pipeline {
                      steps {
                         withSonarQubeEnv('sonarqube') { 
                         //bat "${scannerHome}/bin/sonar-scanner.bat"
-                        bat 'gradle --info sonarqube  -Dsonar.projectKey=catalog-service -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes -Dsonar.coverage.jacoco.xmlReportPaths=./build/reports/jacoco/test/html/index.html'
+                        bat 'gradle --info sonarqube  -Dsonar.projectKey=demoapp -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes -Dsonar.coverage.jacoco.xmlReportPaths=./build/reports/jacoco/test/html/index.html'
            
                         }
                      }

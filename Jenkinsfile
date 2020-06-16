@@ -18,7 +18,12 @@ pipeline {
                         androidLint pattern: '**/lint-results-*.xml'
                      }
                 }
-                stage('SonarQube') {
+                      stage('SonarQube analysis') {
+    withSonarQubeEnv() { // Will pick the global server connection you have configured
+      bat './gradlew sonarqube'
+    }
+  }
+                /*stage('SonarQube') {
                      environment {
                         scannerHome = tool 'SonarQubeScanner'
                      }
@@ -29,7 +34,11 @@ pipeline {
            
                         }
                      }
-                }
+                }*/
+                      
+                      
+                      
+                      
                /* stage('Sonarqube') {
                      def scannerHome = tool 'SonarScanner 4.0';
                       //steps {

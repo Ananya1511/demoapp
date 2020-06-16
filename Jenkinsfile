@@ -18,18 +18,14 @@ pipeline {
                                             androidLint pattern: '**/lint-results-*.xml'
                                  }
                       }
-                      stage('SonarQube analysis') {
+                      stage('SonarQube Analysis') {
                                  steps{
-                                            step{
                                             withSonarQubeEnv('sonarqube') {
                                             bat './gradlew sonarqube'
                                             }
-                                            }
-                                            step{
-                                                       
                                             timeout(time: 10, unit: 'MINUTES') {
                                                        waitForQualityGate abortPipeline: true
-                                            }}
+                                            }
                                             
                                  }
                       }

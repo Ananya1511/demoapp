@@ -19,7 +19,7 @@ pipeline {
                      }
                 }
                 stage('Sonarqube') {
-                     environment {
+                     /*environment {
                         scannerHome = tool 'SonarQubeScanner'
                       }
                       steps {
@@ -29,7 +29,10 @@ pipeline {
                       timeout(time: 10, unit: 'MINUTES') {
                          waitForQualityGate abortPipeline: true
                          }
-                      }
+                      }*/
+                           steps{
+                           bat './gradlew sonarqube'
+                           }
                 }
                 
                       

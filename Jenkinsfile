@@ -20,12 +20,17 @@ pipeline {
                       }
                       stage('SonarQube analysis') {
                                  steps{
-                                            withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
+                                            step{
+                                            withSonarQubeEnv('sonarqube') {
                                             bat './gradlew sonarqube'
                                             }
+                                            }
+                                            step{
+                                                       
                                             timeout(time: 10, unit: 'MINUTES') {
                                                        waitForQualityGate abortPipeline: true
-                                            }
+                                            }}
+                                            
                                  }
                       }
                       /*stage("Quality Gate"){

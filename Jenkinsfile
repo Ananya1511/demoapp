@@ -18,7 +18,7 @@ pipeline {
                         androidLint pattern: '**/lint-results-*.xml'
                      }
                 }
-                stage('SonarQube') {
+                /*stage('SonarQube') {
                      environment {
                         scannerHome = tool 'SonarQubeScanner'
                      }
@@ -27,7 +27,7 @@ pipeline {
                         bat "${scannerHome}/bin/sonar-scanner.bat"
                         }
                      }
-                }
+                }*/
                /* stage('Sonarqube') {
                      def scannerHome = tool 'SonarScanner 4.0';
                       //steps {
@@ -39,11 +39,11 @@ pipeline {
                          //}
                       }
                  }*/
-                  /*    stage('Sonar'){
+                      stage('Sonar'){
                                  steps{
-                                            bat 'gradlew sonarqube'
+                                            bat 'gradle sonarqube'
                                  }
-                      }*/
+                      }
                       
                       
            }

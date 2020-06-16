@@ -20,12 +20,7 @@ pipeline {
                 }
                 stage('Static Security Analysis') {
                     steps{
-                        appscan application: '178d34b8-bdaa-45d9-b6eb-e013e8ebb040', 
-                        credentials: 'hcl-app-scan', 
-                        name: 'HCL-app-scan', 
-                        scanner: mobile_analyzer(hasOptions: false, target: 'C:\\Users\\anapraka\\.jenkins\\workspace\\androidPipeline\\app\\build\\outputs\\apk\\debug\\app-debug.apk'),
-                        type: 'Mobile Analyzer', 
-                        wait: true
+                        bat './gradlew clean sonarqube'
                     }
                 }
                 stage('Publish to App Center') {

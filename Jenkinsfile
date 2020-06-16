@@ -18,7 +18,17 @@ pipeline {
                         androidLint pattern: '**/lint-results-*.xml'
                      }
                 }
-                stage('Sonarqube') {
+                stage('SonarQube') {
+                     environment {
+                        scannerHome = tool 'SonarQubeScanner'
+                     }
+                     steps {
+                        withSonarQubeEnv('sonarqube') { 
+                        bat "${scannerHome}/bin/sonar-scanner.bat"
+                        }
+                     }
+                }
+               /* stage('Sonarqube') {
                      def scannerHome = tool 'SonarScanner 4.0';
                       //steps {
                          withSonarQubeEnv('sonarqube') {
@@ -28,7 +38,7 @@ pipeline {
                         // waitForQualityGate abortPipeline: true
                          //}
                       }
-                 }
+                 }*/
                   /*    stage('Sonar'){
                                  steps{
                                             bat 'gradlew sonarqube'

@@ -39,11 +39,21 @@ pipeline {
                          //}
                       }
                  }*/
-                      stage('Sonar'){
+                      /*stage('Sonar'){
                                  steps{
                                             bat 'gradle sonarqube'
                                  }
-                      }
+                      }*/
+                      stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonar.tools.****) {
+                 script {
+                     cmd.withNexusCredentials {
+                            bat 'gradle --info sonarqube  -Dsonar.projectKey=catalog-service -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes -Dsonar.coverage.jacoco.xmlReportPaths=./build/reports/jacoco/test/html/index.html'
+                        }
+                }
+            }
+        }
                       
                       
            }

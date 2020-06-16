@@ -18,12 +18,20 @@ pipeline {
                         androidLint pattern: '**/lint-results-*.xml'
                      }
                 }
-                      stage('SonarQube analysis') {
-                                 steps{
-    withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
-      bat './gradlew sonarqube'
+                stage('SonarQube analysis') {
+                     steps{
+                        withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
+                        bat './gradlew sonarqube'
                //bat './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin'
-    }
+                        }
+                                
+                     }
+                }
+                      stage("Quality Gate"){
+  timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+    def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+    if (qg.status != 'OK') {
+      error "Pipeline aborted due to quality gate failure: ${qg.status}"
     }
   }
                 /*stage('SonarQube') {

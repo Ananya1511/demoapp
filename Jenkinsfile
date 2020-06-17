@@ -14,7 +14,7 @@ pipeline {
                       }
                       stage("Static Code Analysis") {
                                  steps{
-                                            bat './gradlew lintDebug'
+                                            bat './gradlew lint'
                                             androidLint pattern: '**/lint-results-*.xml'
                                  }
                       }
